@@ -1,7 +1,157 @@
 import React, { useState, useEffect } from 'react';
-import { Home, ArrowLeft, ArrowRight, Download, Upload, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { Home, ArrowLeft, ArrowRight, Download, Upload, HelpCircle, CheckCircle2, Sparkles, Highlighter, EyeOff } from 'lucide-react';
 import { exportToExcel, importFromExcel } from '../utils/excelHandler';
+
+const principleSummaries: { [key: string]: string } = {
+  "1. Transparency": "Transparency ensures visibility into an AI system's intent, impact, data usage, and limitations. It enables affected stakeholders to understand how decisions are reached and data is processed, mitigating risks of opacity.",
+  "2. Explainability": "Explainability ensures that AI decisions can be explained and understood by users. The required depth of explanation varies by context and consequences. If direct explanations are not possible (black-box models), alternative governance measures must be used.",
+  "3. Reproducibility": "Reproducibility builds system resilience by enabling the replication of outcomes and errors. It relies on logging capabilities to monitor the AI lifecycle, track data inputs, and review system outputs to trace root causes.",
+  "4. Safety": "Safety prevents AI systems from causing physical or other intolerable harm. It employs a risk-based approach to identify, assess, and mitigate risks throughout the AI lifecycle, keeping residual risk within tolerable levels.",
+  "5. Security": "Security protects AI systems from adversarial attacks and protects data confidentiality, integrity, and availability. It uses risk-based security controls and clear stakeholder roles (developers, operators, users) to govern system safety.",
+  "6. Robustness": "Robustness ensures AI systems maintain performance under changing environments or adversarial conditions. It focuses on technical validation throughout the system's life cycle alongside standard cybersecurity testing.",
+  "7. Fairness": "Fairness aims to prevent unfair bias against individuals or groups. It requires aligning model outcomes with defined fairness criteria and conducting validation checks throughout the development lifecycle.",
+  "8. Data Governance": "Data Governance establishes authority and clear decision-making processes for managing data across its lifecycle. It ensures data quality, compliance, and integrity for all inputs used in the AI systems.",
+  "9. Accountability": "Accountability implements clear internal governance structures. It ensures proper management oversight, defining roles and responsibilities for the development and deployment of AI systems.",
+  "10. Human agency": "Human agency ensures humans retain oversight and the ability to intervene, override, or self-assess when using AI systems. This prevents over-reliance and corrects negative system outcomes.",
+  "11. Inclusive growth": "Inclusive growth commits stakeholders to use AI for beneficial outcomes for humans and the planet. It focuses on augmenting creativity, reducing social/economic inequalities, and protecting natural environments."
+};
 import type { WorkspaceAnswers } from '../utils/excelHandler';
+
+const generateAISummary = (text: string): string => {
+  if (!text) return "";
+  
+  // Clean up whitespace
+  let clean = text.replace(/\s+/g, ' ').trim();
+  
+  // Remove parenthetical details which are usually examples or exceptions
+  clean = clean.replace(/\s*\([^)]*\)/g, '');
+  
+  // Remove common verbose introductory phrases
+  const prefixesToRemove = [
+    /^[Dd]ocumentary evidence of an?\s+/,
+    /^[Dd]ocumentary evidence showing that\s+/,
+    /^[Dd]ocumentary evidence to show that\s+/,
+    /^[Dd]ocumentary evidence\s+/,
+    /^[Pp]rocesses in place to\s+/,
+    /^[Pp]rocesses in place for\s+/,
+    /^[Ww]here possible,\s+/,
+    /^[Ww]here possible\s+/
+  ];
+  
+  for (const regex of prefixesToRemove) {
+    clean = clean.replace(regex, '');
+  }
+  
+  // Clean up any remaining leading/trailing whitespace or punctuation
+  clean = clean.trim();
+  
+  // Capitalize first letter
+  clean = clean.charAt(0).toUpperCase() + clean.slice(1);
+  
+  // If there are sub-bullets (new lines / commas separating examples), keep the core statement
+  const parts = clean.split(/, e\.g\.,|, for example,|, such as/i);
+  if (parts.length > 0) {
+    clean = parts[0].trim();
+  }
+  
+  // Ensure it ends with a period
+  if (!clean.endsWith('.') && !clean.endsWith('?') && !clean.endsWith('!')) {
+    clean += '.';
+  }
+  
+  return clean;
+};
+
+interface SummarizableTextProps {
+  text: string;
+  className?: string;
+  style?: React.CSSProperties;
+  predefinedSummary?: string;
+  compact?: boolean;
+}
+
+const SummarizableText: React.FC<SummarizableTextProps> = ({
+  text,
+  className = "",
+  style,
+  predefinedSummary,
+  compact = false
+}) => {
+  const [showSummary, setShowSummary] = useState(false);
+  const [highlightSummary, setHighlightSummary] = useState(false);
+
+  // Clean up states when text changes
+  useEffect(() => {
+    setShowSummary(false);
+    setHighlightSummary(false);
+  }, [text]);
+
+  const summary = predefinedSummary || generateAISummary(text);
+
+  const bottomPadding = showSummary 
+    ? (compact ? '3.2rem' : '4.2rem') 
+    : (compact ? '2.2rem' : '3.2rem');
+
+  return (
+    <div 
+      className="summarizable-container" 
+      style={{ 
+        position: 'relative', 
+        paddingBottom: bottomPadding, 
+        transition: 'padding-bottom 0.2s ease',
+        width: '100%',
+        ...style 
+      }}
+    >
+      <div className={`summarizable-content ${className}`}>
+        {text}
+      </div>
+
+      {showSummary && (
+        <div className={`summary-box ${highlightSummary ? 'highlighted' : ''}`} style={{ marginTop: compact ? '0.5rem' : '1rem' }}>
+          <div className="summary-title-row">
+            <div className="summary-title-text">
+              <Sparkles size={10} /> AI Summary
+            </div>
+            <div className="summary-actions">
+              <button 
+                className={`btn-summary-action highlight-btn ${highlightSummary ? 'active' : ''}`}
+                onClick={() => setHighlightSummary(!highlightSummary)}
+                title="Highlight summary text"
+              >
+                <Highlighter size={10} /> {highlightSummary ? 'Highlighted' : 'Highlight'}
+              </button>
+              <button 
+                className="btn-summary-action"
+                onClick={() => setShowSummary(false)}
+                title="Hide summary box"
+              >
+                <EyeOff size={10} /> Hide
+              </button>
+            </div>
+          </div>
+          <div className="summary-content-text" style={{ fontSize: compact ? '0.8rem' : '0.88rem' }}>
+            {summary}
+          </div>
+        </div>
+      )}
+
+      <button 
+        className={`btn btn-secondary btn-light btn-ai-summary ${compact ? 'compact' : ''}`}
+        onClick={() => setShowSummary(!showSummary)}
+        style={{ 
+          position: 'absolute', 
+          right: '0', 
+          bottom: '0',
+          margin: '0.25rem 0'
+        }}
+      >
+        <Sparkles size={compact ? 12 : 14} />
+        {showSummary ? 'Hide Summary' : 'Summarize'}
+      </button>
+    </div>
+  );
+};
 
 interface WorkspaceData {
   companyName: string;
@@ -300,7 +450,10 @@ export const Checklist: React.FC<ChecklistProps> = ({
         {/* Principle Description Panel */}
         <div className="principle-intro-box">
           <div className="principle-title">{activePrincipleKey}</div>
-          <div className="principle-desc">{activePrinciple.principle_description}</div>
+          <SummarizableText 
+            text={activePrinciple.principle_description} 
+            predefinedSummary={principleSummaries[activePrincipleKey]}
+          />
         </div>
 
         {/* Outcomes & Processes List */}
@@ -310,7 +463,12 @@ export const Checklist: React.FC<ChecklistProps> = ({
             <div key={outcomeId} className="outcome-container">
               <div className="outcome-header">
                 <span className="outcome-id-badge">Outcome {outcomeId}</span>
-                <div className="outcome-title">{processes[0].outcomes}</div>
+                <SummarizableText 
+                  text={processes[0].outcomes}
+                  className="outcome-title"
+                  compact={true}
+                  style={{ marginTop: '0.5rem' }}
+                />
               </div>
 
               {processes.map(proc => {
@@ -337,7 +495,10 @@ export const Checklist: React.FC<ChecklistProps> = ({
 
                     <div className="process-columns">
                       <div className="process-desc-col">
-                        {proc.process_to_achieve_outcomes}
+                        <SummarizableText 
+                          text={proc.process_to_achieve_outcomes}
+                          compact={true}
+                        />
                       </div>
                       
                       <div className="evidence-col">
@@ -346,7 +507,10 @@ export const Checklist: React.FC<ChecklistProps> = ({
                           <strong style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-main)', marginBottom: '4px' }}>
                             Type: {proc.evidence_type}
                           </strong>
-                          {proc.evidence}
+                          <SummarizableText 
+                            text={proc.evidence}
+                            compact={true}
+                          />
                         </div>
                       </div>
                     </div>

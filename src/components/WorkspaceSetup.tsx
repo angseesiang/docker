@@ -200,7 +200,7 @@ export const WorkspaceSetup: React.FC<WorkspaceSetupProps> = ({ onWorkspaceCreat
       </form>
 
       {existingWorkspaces.length > 0 && (
-        <div style={{ marginTop: '3.5rem', paddingTop: '2rem', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ marginTop: '3.5rem', paddingTop: '2rem', borderTop: '1px solid var(--border-card)' }}>
           <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
             <FolderOpen size={20} className="text-violet" /> Resume Previous Work
           </h3>
@@ -217,7 +217,7 @@ export const WorkspaceSetup: React.FC<WorkspaceSetupProps> = ({ onWorkspaceCreat
                 onClick={() => handleSelectWorkspace(w.id, w.data)}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', overflow: 'hidden' }}>
-                  <div className="principle-number" style={{ background: '#f3e8ff' }}>
+                  <div className="principle-number" style={{ background: 'var(--primary-light)' }}>
                     <Briefcase size={14} />
                   </div>
                   <div style={{ textAlign: 'left', overflow: 'hidden' }}>

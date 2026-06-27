@@ -205,7 +205,7 @@ export default function App() {
       </main>
 
       {/* Footer copyright */}
-      <footer style={{ marginTop: '3rem', padding: '1.5rem 0', borderTop: '1px solid rgba(229, 231, 235, 0.5)', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-light)' }}>
+      <footer style={{ marginTop: '3rem', padding: '1.5rem 0', borderTop: '1px solid var(--border-card)', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-light)' }}>
         &copy; {new Date().getFullYear()} AI Verify Foundation. All rights reserved. 
       </footer>
     </div>

@@ -150,7 +150,7 @@ export const ReportSummary: React.FC<ReportSummaryProps> = ({
                 <div className="stat-label">Answered</div>
               </div>
               <div className="stat-box">
-                <div className="stat-value" style={{ color: '#10b981' }}>{yesCount}</div>
+                <div className="stat-value" style={{ color: '#00e676' }}>{yesCount}</div>
                 <div className="stat-label">Yes status</div>
               </div>
             </div>
@@ -158,11 +158,11 @@ export const ReportSummary: React.FC<ReportSummaryProps> = ({
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.85rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #f9fafb' }}>
                 <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Implemented (Yes):</span>
-                <span style={{ fontWeight: 700, color: '#166534' }}>{yesCount}</span>
+                <span style={{ fontWeight: 700, color: '#00e676' }}>{yesCount}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #f9fafb' }}>
                 <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Not Implemented (No):</span>
-                <span style={{ fontWeight: 700, color: '#991b1b' }}>{noCount}</span>
+                <span style={{ fontWeight: 700, color: '#ff4d5b' }}>{noCount}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #f9fafb' }}>
                 <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Not Applicable (N/A):</span>
@@ -271,7 +271,7 @@ export const ReportSummary: React.FC<ReportSummaryProps> = ({
                     <td style={{ fontWeight: 600, color: 'var(--text-main)' }}>{stat.key}</td>
                     <td>
                       <div className="progress-mini-bar-bg">
-                        <div className="progress-mini-bar-fill" style={{ width: `${pct}%`, backgroundColor: pct === 100 ? '#10b981' : 'var(--primary)' }}></div>
+                        <div className="progress-mini-bar-fill" style={{ width: `${pct}%`, backgroundColor: pct === 100 ? '#00e676' : 'var(--primary)' }}></div>
                       </div>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>{pct}%</span>
                     </td>
@@ -289,7 +289,7 @@ export const ReportSummary: React.FC<ReportSummaryProps> = ({
             <h3 style={{ marginBottom: '0.5rem' }}>Technical Verification Details (Project Moonshot)</h3>
             <p>The following technical benchmark summary will be appended to the report:</p>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1.5rem', background: '#faf5ff', border: '1px solid #f3e8ff', borderRadius: 'var(--radius-md)', padding: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1.5rem', background: '#c1121f14', border: '1px solid #c1121f33', borderRadius: 'var(--radius-md)', padding: '1.25rem' }}>
               <div>
                 <strong style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-light)', letterSpacing: '0.5px' }}>Model Connector</strong>
                 <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{moonshotResults.metadata?.connector_name || "N/A"}</span>
@@ -301,11 +301,11 @@ export const ReportSummary: React.FC<ReportSummaryProps> = ({
                 </div>
                 <div>
                   <strong style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-light)', letterSpacing: '0.5px' }}>Passed</strong>
-                  <span style={{ fontWeight: 700, color: '#166534' }}>{moonshotResults.results?.stats?.passed || 0}</span>
+                  <span style={{ fontWeight: 700, color: '#00e676' }}>{moonshotResults.results?.stats?.passed || 0}</span>
                 </div>
                 <div>
                   <strong style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-light)', letterSpacing: '0.5px' }}>Failed</strong>
-                  <span style={{ fontWeight: 700, color: '#991b1b' }}>{moonshotResults.results?.stats?.failed || 0}</span>
+                  <span style={{ fontWeight: 700, color: '#ff4d5b' }}>{moonshotResults.results?.stats?.failed || 0}</span>
                 </div>
               </div>
             </div>

@@ -149,7 +149,7 @@ export const TechnicalTest: React.FC<TechnicalTestProps> = ({
         <div style={{ marginBottom: '2.5rem' }}>
           <div className="uploaded-file-card">
             <div className="file-info">
-              <CheckCircle size={24} style={{ color: '#10b981' }} />
+              <CheckCircle size={24} style={{ color: '#00e676' }} />
               <div>
                 <div className="file-name">Technical Report Loaded Successfully</div>
                 <div className="file-size">Model/Connector: {metadata.connector_name || "Generic Model"}</div>
@@ -166,12 +166,12 @@ export const TechnicalTest: React.FC<TechnicalTestProps> = ({
               <div className="stat-value" style={{ color: 'var(--primary)' }}>{stats.total}</div>
               <div className="stat-label">Total Benchmarks</div>
             </div>
-            <div className="stat-box" style={{ backgroundColor: '#f0fdf4', borderColor: '#bbf7d0' }}>
-              <div className="stat-value" style={{ color: '#166534' }}>{stats.passed}</div>
+            <div className="stat-box" style={{ backgroundColor: '#00e6761a', borderColor: '#00e6764d' }}>
+              <div className="stat-value" style={{ color: '#00e676' }}>{stats.passed}</div>
               <div className="stat-label">Passed</div>
             </div>
-            <div className="stat-box" style={{ backgroundColor: '#fef2f2', borderColor: '#fecaca' }}>
-              <div className="stat-value" style={{ color: '#991b1b' }}>{stats.failed}</div>
+            <div className="stat-box" style={{ backgroundColor: '#c1121f1a', borderColor: '#c1121f4d' }}>
+              <div className="stat-value" style={{ color: '#ff4d5b' }}>{stats.failed}</div>
               <div className="stat-label">Failed</div>
             </div>
           </div>

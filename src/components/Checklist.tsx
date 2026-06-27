@@ -364,7 +364,7 @@ export const Checklist: React.FC<ChecklistProps> = ({
                 </span>
                 <div className="sidebar-item-progress">
                   <span>Progress: {progress.answered}/{progress.total}</span>
-                  {isCompleted && <CheckCircle2 size={12} style={{ color: isActive ? 'white' : '#10b981' }} />}
+                  {isCompleted && <CheckCircle2 size={12} style={{ color: isActive ? 'white' : '#00e676' }} />}
                 </div>
               </button>
             );
@@ -416,7 +416,7 @@ export const Checklist: React.FC<ChecklistProps> = ({
             </div>
           )}
           {importSuccess && (
-            <div className="alert alert-info" style={{ marginTop: '12px', marginBottom: 0, backgroundColor: '#f0fdf4', borderColor: '#bbf7d0', color: '#166534' }}>
+            <div className="alert alert-info" style={{ marginTop: '12px', marginBottom: 0, backgroundColor: '#00e6761a', borderColor: '#00e6764d', color: '#6ee7b7' }}>
               {importSuccess}
             </div>
           )}

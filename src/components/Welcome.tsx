@@ -35,7 +35,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '2rem' }}>
             <div style={{ display: 'flex', gap: '12px' }}>
-              <div className="principle-number" style={{ background: '#f3e8ff' }}><Award size={16} /></div>
+              <div className="principle-number" style={{ background: 'var(--primary-light)' }}><Award size={16} /></div>
               <div>
                 <strong style={{ color: 'var(--text-main)' }}>Demonstrate Compliance:</strong>
                 <p style={{ margin: 0, fontSize: '0.9rem' }}>Validate your implementation of responsible AI practices to build trust with customers and stakeholders.</p>
@@ -43,7 +43,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
             </div>
             
             <div style={{ display: 'flex', gap: '12px' }}>
-              <div className="principle-number" style={{ background: '#f3e8ff' }}><Shield size={16} /></div>
+              <div className="principle-number" style={{ background: 'var(--primary-light)' }}><Shield size={16} /></div>
               <div>
                 <strong style={{ color: 'var(--text-main)' }}>Audit Readiness:</strong>
                 <p style={{ margin: 0, fontSize: '0.9rem' }}>Perfect for application owners, internal compliance teams, and external auditors seeking validation.</p>
@@ -51,7 +51,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
             </div>
 
             <div style={{ display: 'flex', gap: '12px' }}>
-              <div className="principle-number" style={{ background: '#f3e8ff' }}><BookOpen size={16} /></div>
+              <div className="principle-number" style={{ background: 'var(--primary-light)' }}><BookOpen size={16} /></div>
               <div>
                 <strong style={{ color: 'var(--text-main)' }}>Mapped to Global Standards:</strong>
                 <p style={{ margin: 0, fontSize: '0.9rem' }}>Directly cross-referenced with US NIST AI RMF, ISO/IEC 42001, and the G7 Hiroshima Process Code of Conduct.</p>
@@ -77,7 +77,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
         </div>
       </div>
 
-      <div style={{ marginTop: '3.5rem', paddingTop: '2.5rem', borderTop: '1px solid #e5e7eb' }}>
+      <div style={{ marginTop: '3.5rem', paddingTop: '2.5rem', borderTop: '1px solid var(--border-card)' }}>
         <h3 style={{ marginBottom: '1.25rem' }}>Responsible AI Principles Covered</h3>
         <div className="principles-list-grid">
           {principles.map((p, idx) => (
